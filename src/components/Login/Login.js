@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
@@ -35,25 +35,25 @@ const Login = (props) => {
   // const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
-  // useEffect(() => {
-  //   console.log("requested!!!!");
-  //   const handler = setTimeout(() => {
-  //     setFormIsValid(
-  //       enteredEmail.includes('@') && enteredPassword.trim().length > 6
-  //     );
-  //   }, 500);
-  //   return () => {
-  //     clearTimeout(handler);
-  //   };
+  useEffect(() => {
+    console.log("requested!!!!");
+    const handler = setTimeout(() => {
+      setFormIsValid(
+        emailState.value.includes('@') && passwordState.value.trim().length > 6
+      );
+    }, 500);
+    return () => {
+      clearTimeout(handler);
+    };
 
-  // }, [enteredEmail, enteredPassword]);
+  }, [emailState.isValid, passwordState.isValid]);
 
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: "USER_INPUT", val: event.target.value });
     // setEnteredEmail(event.target.value);
-    setFormIsValid(
-      emailState.value.includes('@') && passwordState.value.trim().length > 6
-    );
+    // setFormIsValid(
+    //   emailState.value.includes('@') && passwordState.value.trim().length > 6
+    // );
   };
 
   const passwordChangeHandler = (event) => {
@@ -67,9 +67,9 @@ const Login = (props) => {
 
   const validatePasswordHandler = () => {
     dispatchPassword({ type: "INPUT_BLUR" });
-    setFormIsValid(
-      emailState.value.includes('@') && passwordState.value.trim().length > 6
-    );
+    // setFormIsValid(
+    //   emailState.value.includes('@') && passwordState.value.trim().length > 6
+    // );
   };
 
   const submitHandler = (event) => {
