@@ -35,6 +35,10 @@ const Login = (props) => {
   // const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
 
+
+  const { isValid: emailValid } = emailState;
+  const { isValid: passwordValid } = passwordState;
+
   useEffect(() => {
     console.log("requested!!!!");
     const handler = setTimeout(() => {
@@ -46,7 +50,7 @@ const Login = (props) => {
       clearTimeout(handler);
     };
 
-  }, [emailState.isValid, passwordState.isValid]);
+  }, [emailValid, passwordValid]);
 
   const emailChangeHandler = (event) => {
     dispatchEmail({ type: "USER_INPUT", val: event.target.value });
